@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <!-- BOOTSTRAP CDN LINK -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-success text-center">All Products List</h1>
+        <div id="result" class="row">
+            
+        </div>
+    </div>
+</body>
+
+<script>
+
+async function fetchProductsData(){
+
+     try {
+        const response = await fetch("https://fakestoreapi.com/products")
+        console.log(response);
+
+       const allProducts = await response.json()
+       console.log(allProducts);
+            
+      allProducts.forEach(products=>{
+        result.innerHTML += `
+        <div class="col-lg-3">
+                <div class="card mb-2 p-3" style="width: 18rem;">
+                    <img height="300px" src="${products.image}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${products.title}</h5>
+                        <p class="card-text text-center">$${products.price}</p>
+
+                    </div>
+                </div>
+            </div>
+        `
+      })
+
+     } catch (error) {
+        console.log(error);
+        
+     }
+        
+
+}
+
+fetchProductsData()
+
+</script>
+
+</html>
